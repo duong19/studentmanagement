@@ -27,4 +27,20 @@ public class StudentService implements IStudentService {
 		return studentDAO.save(newStudent);
 	}
 
+	public Student findOne(int studentID) {
+		// TODO Auto-generated method stub
+		return studentDAO.findOne(studentID);
+	}
+
+	public Student update(Student updateStudent) {
+		// TODO Auto-generated method stub
+		studentDAO.update(updateStudent);
+		return studentDAO.findOne(updateStudent.getStudentID());
+	}
+
+	public void delete(int studentID) {
+		studentDAO.delete(studentID);
+		
+	}
+	
 }

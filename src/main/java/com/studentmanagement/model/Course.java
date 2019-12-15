@@ -1,12 +1,12 @@
 package com.studentmanagement.model;
 
-import java.sql.Timestamp;
+
 
 public class Course {
 	private int courseID;
 	private int courseName;
 	private int courseCredit;
-	private Timestamp year;
+	private int semester;
 	public int getCourseID() {
 		return courseID;
 	}
@@ -25,11 +25,12 @@ public class Course {
 	public void setCourseCredit(int courseCredit) {
 		this.courseCredit = courseCredit;
 	}
-	public Timestamp getYear() {
-		return year;
+	public int getSemester() {
+		return semester;
 	}
-	public void setYear(Timestamp year) {
-		this.year = year;
+	public void setSemester(int semester) {
+		this.semester = semester;
 	}
+	
 	
 }

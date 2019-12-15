@@ -29,11 +29,37 @@ public class StudentDAO extends AbstractDAO implements IStudentDAO {
 	}
 
 	public Integer save(Student newStudent) {
-		StringBuilder sql = new StringBuilder("insert into student (first_name,last_name,");
+		StringBuilder sql = new StringBuilder("insert into student (student_name,");
 		sql.append("birthday,address,username,password,roleID)");
-		sql.append("values (?,?,?,?,?,?,2)");
-		return insert(sql.toString(),newStudent.getFirstName(),newStudent.getLastName(),newStudent.getBirthday(),newStudent.getAddress(),
-						newStudent.getUsername(),newStudent.getPassword(),newStudent.getRoleID());
+		sql.append("values (?,?,?,?,?,2)");
+		return insert(sql.toString(),newStudent.getName(),newStudent.getBirthday(),newStudent.getAddress(),
+						newStudent.getUsername(),newStudent.getPassword());
+	}
+
+	public Student findOne(int studentID) {
+		StringBuilder sql = new StringBuilder("select * from student s\r\n"+
+				"inner join role r\r\n" +
+				"on s.roleID = r.roleID\r\n" +
+				"where studentID = " + studentID);
+		List<Student> students = query(sql.toString(),new StudentMapper());
+		return students.get(0);
+		
+	}
+
+	public void update(Student updateStudent) {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder("update student set student_name = ?,");
+		sql.append("birthday = ?,address = ?, username = ?,password = ? where studentID = ? \r\n");
+		update(sql.toString(),updateStudent.getName(),updateStudent.getBirthday(),updateStudent.getAddress(),
+				updateStudent.getUsername(),updateStudent.getPassword(),updateStudent.getRoleID(),updateStudent.getStudentID());
+		
+	}
+
+	public void delete(int studentID) {
+		StringBuilder sql = new StringBuilder("delete from studentgrade where studentID = " + studentID + ";\r\n");
+		 sql.append("delete from student where studentID = " + studentID);
+		 update(sql.toString());
+		
 	}
 
 	

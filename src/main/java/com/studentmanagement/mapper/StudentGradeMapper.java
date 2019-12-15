@@ -10,13 +10,16 @@ public class StudentGradeMapper implements RowMapper<StudentGrade>{
 	public StudentGrade mapRow(ResultSet resultSet) {
 		try {
 			StudentGrade grade = new StudentGrade();
-			grade.setCourseID(resultSet.getInt("courseID"));
+			grade.setCourseID(resultSet.getString("courseID"));
 			grade.setCourseName(resultSet.getString("courseName"));
 			grade.setCredit(resultSet.getFloat("courseCredit"));
-			grade.setGrade(resultSet.getFloat("grade"));
+			grade.setGrade1(resultSet.getFloat("grade1"));
+			grade.setGrade2(resultSet.getFloat("grade2"));
 			grade.setSemester(resultSet.getInt("semester"));
 			grade.setStudentID(resultSet.getInt("studentID"));
 			grade.setGradeID(resultSet.getInt("gradeID"));
+			grade.setMidCredit(resultSet.getFloat("midTermCredit"));
+			grade.setEndCredit(resultSet.getFloat("endTermCredit"));
 			return grade;
 		}catch(SQLException e) {
 			return null;

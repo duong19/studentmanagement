@@ -1,11 +1,10 @@
 package com.studentmanagement.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Person {
-	private String firstName;
-	private String lastName;
-	private Timestamp birthday;
+	private String name;
+	private Date birthday;
 	private String address;
 	public String getUsername() {
 		return username;
@@ -23,22 +22,11 @@ public class Person {
 	private String password;
 	private int roleID;
 	private String roleName;
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public Timestamp getBirthday() {
+
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 	public String getAddress() {
@@ -59,5 +47,11 @@ public class Person {
 	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }
