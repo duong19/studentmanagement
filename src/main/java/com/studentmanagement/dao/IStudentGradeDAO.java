@@ -12,5 +12,6 @@ public interface IStudentGradeDAO {
 	public Integer save(StudentGrade studentGrade);
 	public void update(StudentGrade updateGrade);
 	public void deleteStudentGrade(int gradeID);
+	StudentGrade findOne(int gradeID);
 	
 }

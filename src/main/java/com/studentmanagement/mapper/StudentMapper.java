@@ -17,6 +17,7 @@ public class StudentMapper implements RowMapper<Student> {
 			student.setUsername(resultSet.getString("username"));
 			student.setPassword(resultSet.getString("password"));
 			student.setRoleID(resultSet.getInt("roleID"));
+			student.setFaculty(resultSet.getString("faculty"));
 			return student;
 		}catch(SQLException e) {
 			return null;

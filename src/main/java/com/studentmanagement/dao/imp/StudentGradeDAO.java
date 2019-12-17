@@ -60,12 +60,23 @@ public class StudentGradeDAO extends AbstractDAO implements IStudentGradeDAO {
 		
 		
 	}
+	
 
 	public void deleteStudentGrade(int gradeID) {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder("delete from studentgrade where gradeID = " + gradeID);
 		update(sql.toString());
 		
+		
+	}
+
+	public StudentGrade findOne(int gradeID) {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder("select * from studentgrade sg,course c\r\n" +
+											"where sg.courseID = c.courseID\r\n" +
+											"and sg.gradeID = " + gradeID);
+		List<StudentGrade> studentGrades = query(sql.toString(),new StudentGradeMapper());
+		return studentGrades.get(0);
 		
 	}
 
