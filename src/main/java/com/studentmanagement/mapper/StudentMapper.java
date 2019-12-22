@@ -11,13 +11,14 @@ public class StudentMapper implements RowMapper<Student> {
 		try {
 			Student student = new Student();
 			student.setAddress(resultSet.getString("address"));
-			student.setBirthday(resultSet.getDate("birthday"));
+			student.setBirthday(resultSet.getString("birthday"));
 			student.setName(resultSet.getString("student_name"));
-			student.setStudentID(resultSet.getInt("studentID"));
-			student.setUsername(resultSet.getString("username"));
+			student.setStudentID(resultSet.getString("studentID"));
 			student.setPassword(resultSet.getString("password"));
 			student.setRoleID(resultSet.getInt("roleID"));
 			student.setFaculty(resultSet.getString("faculty"));
+			student.setMessage("success");
+
 			return student;
 		}catch(SQLException e) {
 			return null;

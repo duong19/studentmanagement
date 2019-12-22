@@ -19,24 +19,30 @@ public class StudentDAO extends AbstractDAO implements IStudentDAO {
 		
 	}
 
-	public Student findByNameAndPassword(String username, String password) {
+	public Student findByIDAndPassword(String studentID, String password) {
 		StringBuilder sql = new StringBuilder("select * from student s\r\n"+
 				"inner join role r\r\n" +
 				"on s.roleID = r.roleID\r\n" +
-				"where username = '" + username +"' and password = '" + password +"'");
+				"where studentID = '" + studentID +"' and password = '" + password +"'");
 		List<Student> students = query(sql.toString(),new StudentMapper());
-		return students.get(0);
+		if(students.isEmpty()) {
+			Student student = new Student();
+			student.setMessage("failure");
+			return student;
+		}else {
+			return students.get(0);
+		}
 	}
 
-	public Integer save(Student newStudent) {
-		StringBuilder sql = new StringBuilder("insert into student (student_name,");
-		sql.append("birthday,address,username,password,roleID)");
-		sql.append("values (?,?,?,?,?,2)");
-		return insert(sql.toString(),newStudent.getName(),newStudent.getBirthday(),newStudent.getAddress(),
-						newStudent.getUsername(),newStudent.getPassword());
+	public Student save(Student newStudent) {
+		StringBuilder sql = new StringBuilder("insert into student (studentID,student_name,");
+		sql.append("birthday,address,password,roleID)");
+		sql.append("values (?,?,str_to_date(?,'%d/%m/%Y'),?,?,2)");
+		return insertStudent(sql.toString(),newStudent.getStudentID(),newStudent.getName(),newStudent.getBirthday(),newStudent.getAddress(),
+						newStudent.getPassword());
 	}
 
-	public Student findOne(int studentID) {
+	public Student findOne(String studentID) {
 		StringBuilder sql = new StringBuilder("select * from student s\r\n"+
 				"inner join role r\r\n" +
 				"on s.roleID = r.roleID\r\n" +
@@ -49,13 +55,13 @@ public class StudentDAO extends AbstractDAO implements IStudentDAO {
 	public void update(Student updateStudent) {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder("update student set student_name = ?,");
-		sql.append("birthday = ?,address = ?, username = ?,password = ? where studentID = ? \r\n");
+		sql.append("birthday = str_to_date(?,'%d/%m/%Y') ,address = ?,password = ? where studentID = ? \r\n");
 		update(sql.toString(),updateStudent.getName(),updateStudent.getBirthday(),updateStudent.getAddress(),
-				updateStudent.getUsername(),updateStudent.getPassword(),updateStudent.getRoleID(),updateStudent.getStudentID());
+			updateStudent.getPassword(),updateStudent.getStudentID());
 		
 	}
 
-	public void delete(int studentID) {
+	public void delete(String studentID) {
 		StringBuilder sql = new StringBuilder("delete from studentgrade where studentID = " + studentID + ";\r\n");
 		 sql.append("delete from student where studentID = " + studentID);
 		 update(sql.toString());

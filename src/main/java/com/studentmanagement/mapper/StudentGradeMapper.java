@@ -12,7 +12,7 @@ public class StudentGradeMapper implements RowMapper<StudentGrade>{
 			StudentGrade grade = new StudentGrade();
 			grade.setCourseID(resultSet.getString("courseID"));
 			grade.setCourseName(resultSet.getString("courseName"));
-			grade.setCredit(resultSet.getFloat("courseCredit"));
+			grade.setCredit(resultSet.getInt("courseCredit"));
 			grade.setGrade1(resultSet.getFloat("grade1"));
 			grade.setGrade2(resultSet.getFloat("grade2"));
 			grade.setSemester(resultSet.getInt("semester"));

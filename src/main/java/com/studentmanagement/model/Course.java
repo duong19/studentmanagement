@@ -2,14 +2,14 @@ package com.studentmanagement.model;
 
 
 
-public class Course {
-	private int courseID;
+public class Course extends Abstract {
+	private String courseID;
 	private String courseName;
 	private int courseCredit;
-	public int getCourseID() {
+	public String getCourseID() {
 		return courseID;
 	}
-	public void setCourseID(int courseID) {
+	public void setCourseID(String courseID) {
 		this.courseID = courseID;
 	}
 	public String getCourseName() {

@@ -55,8 +55,7 @@ public class StudentAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		Student student = HttpUtil.of(request.getReader()).toModel(Student.class);
-		Integer id = studentService.save(student);
-		student = studentService.findOne(id);
+		student = studentService.save(student);
 		mapper.writeValue(response.getOutputStream(),student);
 		
 	}

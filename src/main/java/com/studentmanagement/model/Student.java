@@ -3,12 +3,12 @@ package com.studentmanagement.model;
 
 
 public class Student extends Person {
-	private int studentID;
+	private String studentID;
 	private String faculty;
-	public int getStudentID() {
+	public String getStudentID() {
 		return studentID;
 	}
-	public void setStudentID(int studentID) {
+	public void setStudentID(String studentID) {
 		this.studentID = studentID;
 	}
 	public String getFaculty() {

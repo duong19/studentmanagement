@@ -17,17 +17,17 @@ public class StudentService implements IStudentService {
 		return studentDAO.getAll();
 	}
 
-	public Student findByNameAndPassword(String username, String password) {
+	public Student findByIDAndPassword(String studentID, String password) {
 		// TODO Auto-generated method stub
-		return studentDAO.findByNameAndPassword(username, password);
+		return studentDAO.findByIDAndPassword(studentID, password);
 	}
 
-	public Integer save(Student newStudent) {
+	public Student save(Student newStudent) {
 		// TODO Auto-generated method stub
 		return studentDAO.save(newStudent);
 	}
 
-	public Student findOne(int studentID) {
+	public Student findOne(String studentID) {
 		// TODO Auto-generated method stub
 		return studentDAO.findOne(studentID);
 	}
@@ -38,7 +38,7 @@ public class StudentService implements IStudentService {
 		return studentDAO.findOne(updateStudent.getStudentID());
 	}
 
-	public void delete(int studentID) {
+	public void delete(String studentID) {
 		studentDAO.delete(studentID);
 		
 	}

@@ -12,7 +12,7 @@ public class StudentGradeService implements IStudentGradeService {
 
 	@Inject
 	private IStudentGradeDAO studentGradeDAO;
-	public List<StudentGrade> getAllGradeByStudentID(int studentID) {
+	public List<StudentGrade> getAllGradeByStudentID(String studentID) {
 		// TODO Auto-generated method stub
 		return studentGradeDAO.getAllGradeByStudentID(studentID);
 	}
@@ -22,17 +22,17 @@ public class StudentGradeService implements IStudentGradeService {
 		return studentGradeDAO.getAllGrade();
 	}
 
-	public List<StudentGrade> getAllGradeByCourse(String courseName) {
+	public List<StudentGrade> getAllGradeByCourse(String courseID) {
 		// TODO Auto-generated method stub
-		return studentGradeDAO.getAllGradeByCourse(courseName);
+		return studentGradeDAO.getAllGradeByCourse(courseID);
 	}
 
-	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseName, int semester) {
+	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseID, int semester) {
 		// TODO Auto-generated method stub
-		return studentGradeDAO.getAllGradeByCourseAndSemester(courseName, semester);
+		return studentGradeDAO.getAllGradeByCourseAndSemester(courseID, semester);
 	}
 
-	public Integer save(StudentGrade studentGrade) {
+	public StudentGrade save(StudentGrade studentGrade) {
 		// TODO Auto-generated method stub
 		return studentGradeDAO.save(studentGrade);
 	}
@@ -45,6 +45,11 @@ public class StudentGradeService implements IStudentGradeService {
 	public void delete(int gradeID) {
 		// TODO Auto-generated method stub
 		studentGradeDAO.deleteStudentGrade(gradeID);
+	}
+
+	public List<StudentGrade> getAllGradeBySemester(int semester) {
+		// TODO Auto-generated method stub
+		return studentGradeDAO.getAllGradeBySemester(semester);
 	}
 
 }

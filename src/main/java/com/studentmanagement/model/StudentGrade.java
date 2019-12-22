@@ -1,11 +1,11 @@
 package com.studentmanagement.model;
 
-public class StudentGrade {
+public class StudentGrade extends Abstract {
 	private int studentID;
 	private String courseID;
 	private String courseName;
 	private int semester;
-	private float credit;
+	private int credit;
 	private float grade1;
 	private float grade2;
 	private float midCredit;
@@ -43,10 +43,10 @@ public class StudentGrade {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public float getCredit() {
+	public int getCredit() {
 		return credit;
 	}
-	public void setCredit(float credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	public int getGradeID() {

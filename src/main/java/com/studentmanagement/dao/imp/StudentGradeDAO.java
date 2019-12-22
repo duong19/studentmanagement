@@ -8,7 +8,7 @@ import com.studentmanagement.model.StudentGrade;
 
 public class StudentGradeDAO extends AbstractDAO implements IStudentGradeDAO {
 
-	public List<StudentGrade> getAllGradeByStudentID(int studentID) {
+	public List<StudentGrade> getAllGradeByStudentID(String studentID) {
 		StringBuilder sql = new StringBuilder("select * from studentgrade sg,course c\r\n"
 												+ " where sg.studentID = " + studentID
 												+ " and sg.courseID = c.courseID\r\n");
@@ -24,28 +24,35 @@ public class StudentGradeDAO extends AbstractDAO implements IStudentGradeDAO {
 		return studentGrades;
 	}
 
-	public List<StudentGrade> getAllGradeByCourse(String courseName) {
+	public List<StudentGrade> getAllGradeByCourse(String courseID) {
 		StringBuilder sql = new StringBuilder("select * from studentgrade sg,course c, semester s\r\n"
-				+ " where c.courseName = '" + courseName + "'\r\n" 
+				+ " where c.courseID = '" + courseID + "'\r\n" 
+				+ " and sg.courseID = c.courseID\r\n");
+		List<StudentGrade> studentGrades = query(sql.toString(),new StudentGradeMapper());
+		return studentGrades;
+	}
+	public List<StudentGrade> getAllGradeBySemester(int semester) {
+		StringBuilder sql = new StringBuilder("select * from studentgrade sg,course c, semester s\r\n"
+				+ " where c.semester = '" + semester + "'\r\n" 
 				+ " and sg.courseID = c.courseID\r\n");
 		List<StudentGrade> studentGrades = query(sql.toString(),new StudentGradeMapper());
 		return studentGrades;
 	}
 
-	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseName, int semester) {
+	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseID, int semester) {
 		StringBuilder sql = new StringBuilder("select * from studentgrade sg,course c\r\n"
-				+ " where c.courseName = '" + courseName + "'\r\n"
+				+ " where c.courseID = '" + courseID + "'\r\n"
 				+ "and c.semester =" + semester + "\r\n" 
 				+ " and sg.courseID = c.courseID\r\n");
 		List<StudentGrade> studentGrades = query(sql.toString(),new StudentGradeMapper());
 		return studentGrades;
 	}
 
-	public Integer save(StudentGrade studentGrade) {
+	public StudentGrade save(StudentGrade studentGrade) {
 		StringBuilder sql = new StringBuilder("insert into studentgrade (studentID,");
 		sql.append("courseID,grade1,grade2,semester) ");
 		sql.append("values (?,?,?,?,?)");
-		return insert(sql.toString(),studentGrade.getStudentID(),studentGrade.getCourseID(),
+		return insertStudentGrade(sql.toString(),studentGrade.getStudentID(),studentGrade.getCourseID(),
 						studentGrade.getGrade1(),studentGrade.getGrade2(),studentGrade.getSemester());
 
 	}

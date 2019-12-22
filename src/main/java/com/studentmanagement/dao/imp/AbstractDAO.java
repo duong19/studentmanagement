@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.studentmanagement.mapper.RowMapper;
+import com.studentmanagement.model.Student;
+import com.studentmanagement.model.StudentGrade;
 
 
 public class AbstractDAO {
@@ -100,23 +102,61 @@ public class AbstractDAO {
 			e.printStackTrace();
 		}
 	}
-	public Integer insert(String sql, Object... parameters) {
+	public Student insertStudent(String sql, Object... parameters) {
+		Student student = new Student();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			Integer id = null;
 			connection = getConnection();
 			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			setParameter(statement, parameters);
 			statement.executeUpdate();
 			resultSet = statement.getGeneratedKeys();
-			if (resultSet.next()) {
-				id = resultSet.getInt(1);
-			}
 			connection.commit();
-			return id;
+			student.setMessage("success");
+			return student;
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public StudentGrade insertStudentGrade(String sql, Object... parameters) {
+		StudentGrade grade = new StudentGrade();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			resultSet = statement.getGeneratedKeys();
+			connection.commit();
+			grade.setMessage("success");
+			return grade;
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {

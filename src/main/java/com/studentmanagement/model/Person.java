@@ -2,31 +2,24 @@ package com.studentmanagement.model;
 
 import java.sql.Date;
 
-public class Person {
+public class Person extends Abstract {
 	private String name;
-	private Date birthday;
+	private String birthday;
 	private String address;
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	private String username;
 	private String password;
 	private int roleID;
 	private String roleName;
-
-	public Date getBirthday() {
+	
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getAddress() {
@@ -54,4 +47,5 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }

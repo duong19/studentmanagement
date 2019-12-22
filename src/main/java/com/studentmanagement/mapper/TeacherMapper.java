@@ -16,7 +16,7 @@ public class TeacherMapper implements RowMapper<Teacher> {
 		teacher.setPassword(resultSet.getString("password"));
 		teacher.setName(resultSet.getString("teacher_name"));
 		teacher.setAddress(resultSet.getString("address"));
-		teacher.setBirthday(resultSet.getDate("birthday"));
+		teacher.setBirthday(resultSet.getString("birthday"));
 		teacher.setRoleID(resultSet.getInt("roleID"));
 		return teacher;
 		}catch(SQLException e) {
