@@ -34,8 +34,15 @@ public class StudentService implements IStudentService {
 
 	public Student update(Student updateStudent) {
 		// TODO Auto-generated method stub
-		studentDAO.update(updateStudent);
-		return studentDAO.findOne(updateStudent.getStudentID());
+		Student student = new Student();
+		if(studentDAO.update(updateStudent)) {
+			student.setMessage("success");
+			return student;
+		}else {
+			student.setMessage("failure");
+			return student;
+		}
+		
 	}
 
 	public void delete(String studentID) {

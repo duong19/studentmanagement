@@ -2,9 +2,9 @@ package com.studentmanagement.model;
 
 
 public class Teacher extends Person {
-	private int teacherID;
+	private Integer teacherID;
 	private String username;
-	public int getTeacherID() {
+	public Integer getTeacherID() {
 		return teacherID;
 	}
 	public void setTeacherID(int teacherID) {

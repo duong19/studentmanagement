@@ -9,20 +9,21 @@ public class TeacherMapper implements RowMapper<Teacher> {
 
 	public Teacher mapRow(ResultSet resultSet) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			Teacher teacher = new Teacher();
-		
-		teacher.setUsername(resultSet.getString("username"));
-		teacher.setPassword(resultSet.getString("password"));
-		teacher.setName(resultSet.getString("teacher_name"));
-		teacher.setAddress(resultSet.getString("address"));
-		teacher.setBirthday(resultSet.getString("birthday"));
-		teacher.setRoleID(resultSet.getInt("roleID"));
-		return teacher;
-		}catch(SQLException e) {
+
+			teacher.setUsername(resultSet.getString("username"));
+			teacher.setPassword(resultSet.getString("password"));
+			teacher.setName(resultSet.getString("teacher_name"));
+			teacher.setAddress(resultSet.getString("address"));
+			teacher.setBirthday(resultSet.getString("birthday"));
+			teacher.setRoleID(resultSet.getInt("roleID"));
+			teacher.setMessage("success");
+			teacher.setTeacherID(resultSet.getInt("teacherID"));
+			return teacher;
+		} catch (SQLException e) {
 			return null;
 		}
 	}
-	
 
 }

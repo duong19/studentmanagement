@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.studentmanagement.dao.IStudentGradeDAO;
+import com.studentmanagement.model.Semester;
 import com.studentmanagement.model.StudentGrade;
 import com.studentmanagement.service.IStudentGradeService;
 
@@ -27,7 +28,7 @@ public class StudentGradeService implements IStudentGradeService {
 		return studentGradeDAO.getAllGradeByCourse(courseID);
 	}
 
-	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseID, int semester) {
+	public List<StudentGrade> getAllGradeByCourseAndSemester(String courseID, String semester) {
 		// TODO Auto-generated method stub
 		return studentGradeDAO.getAllGradeByCourseAndSemester(courseID, semester);
 	}
@@ -37,8 +38,15 @@ public class StudentGradeService implements IStudentGradeService {
 		return studentGradeDAO.save(studentGrade);
 	}
 
-	public void update(StudentGrade updateGrade) {
-		studentGradeDAO.update(updateGrade);
+	public StudentGrade update(StudentGrade updateGrade) {
+		StudentGrade grade = new StudentGrade();
+		if(studentGradeDAO.update(updateGrade)) {
+			grade.setMessage("success");
+			return grade;
+		}else {
+			grade.setMessage("failure");
+			return grade;
+		}
 		
 	}
 
@@ -47,9 +55,14 @@ public class StudentGradeService implements IStudentGradeService {
 		studentGradeDAO.deleteStudentGrade(gradeID);
 	}
 
-	public List<StudentGrade> getAllGradeBySemester(int semester) {
+	public List<StudentGrade> getAllGradeBySemester(String semester) {
 		// TODO Auto-generated method stub
 		return studentGradeDAO.getAllGradeBySemester(semester);
+	}
+
+	public List<Semester> getAllSemester() {
+		// TODO Auto-generated method stub
+		return studentGradeDAO.getAllSemester();
 	}
 
 }

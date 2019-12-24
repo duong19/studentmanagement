@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.studentmanagement.model.Student;
 import com.studentmanagement.model.StudentGrade;
 import com.studentmanagement.service.IStudentGradeService;
 import com.studentmanagement.util.HttpUtil;
@@ -35,13 +34,13 @@ public class StudentGradeAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		String courseID = request.getParameter("courseID");
-		Integer semester = null;
+		String semester = request.getParameter("semester");
 		List<StudentGrade> grades;
-		if (courseID != null && semester != null) {
+		if (courseID != ""  && semester != "") {
 			 grades = studentGradeService.getAllGradeByCourseAndSemester(courseID, semester);
-		} else if (courseID != null && semester == null) {
+		} else if (courseID != "" && semester == "") {
 			 grades = studentGradeService.getAllGradeByCourse(courseID);
-		} else if (courseID == null && semester != null) {
+		} else if (courseID == "" && semester != "") {
 			 grades = studentGradeService.getAllGradeBySemester(semester);
 		} else {
 			 grades = studentGradeService.getAllGrade();
@@ -57,6 +56,7 @@ public class StudentGradeAPI extends HttpServlet {
 		response.setContentType("application/json");
 		StudentGrade grade = HttpUtil.of(request.getReader()).toModel(StudentGrade.class);
 		grade = studentGradeService.save(grade);
+		mapper.writeValue(response.getOutputStream(),grade);
 	}
 
 	@Override
@@ -67,7 +67,8 @@ public class StudentGradeAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		StudentGrade grade = HttpUtil.of(request.getReader()).toModel(StudentGrade.class);
-		studentGradeService.update(grade);
+		grade = studentGradeService.update(grade);
+		mapper.writeValue(response.getOutputStream(),grade);
 
 	}
 
@@ -77,8 +78,17 @@ public class StudentGradeAPI extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		StudentGrade grade = HttpUtil.of(request.getReader()).toModel(StudentGrade.class);
-		studentGradeService.delete(grade.getGradeID());
+		
+		StudentGrade grade = new StudentGrade();
+		String id = request.getParameter("gradeID");
+		if(id != null) {
+			Integer gradeID = Integer.parseInt(id);
+			studentGradeService.delete(gradeID);
+			grade.setMessage("success");
+			mapper.writeValue(response.getOutputStream(), grade);
+
+			
+		}
 
 	}
 

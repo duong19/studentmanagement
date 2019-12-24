@@ -1,22 +1,11 @@
-#main {
-	padding: 20px 0px 0px 0px;
-	margin: 0 auto;
-	font-size: 75%;
-	font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica,
-		Sans-Serif;
-	background-color: #526D9B;
-}
-
-.footer {
-	background-color: #7D8DA9;
-	height: 100px;
+html div {
 	margin: 0 auto;
 	width: 1200px;
 	position: relative;
 }
 
 #bgtop {
-	background-image: url('/template/images/sis_topbg.png');
+	background-image: url('template/images/sis_topbg.png');
 	padding: 10px;
 	width: 100vw;
 	background-size: 100% 100%;
@@ -35,4 +24,36 @@
 
 .logout:hover {
 	color: red;
+}
+
+html body {
+	padding: 20px 0px 0px 0px;
+	margin: 0 auto;
+	font-size: 75%;
+	font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica,
+		Sans-Serif;
+	background-color: #526D9B;
+}
+
+#nav {
+	margin: 0 auto;
+	width: 1200px;
+	position: relative;
+}
+
+.nav-item {
+	width: 600px;
+}
+
+.nav-link {
+	text-align: center;
+	font-size: 15px;
+}
+
+.navbar-nav>li {
+	border-right: 1px solid #000;
+}
+
+.navbar-nav>li:last-child {
+	border: none;
 }

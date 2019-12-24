@@ -17,7 +17,9 @@ public class TeacherDAO  extends AbstractDAO implements ITeacherDAO {
 												"where username = '" + username +"' and password = '" + password +"'");
 		List<Teacher> teachers = query(sql.toString(),new TeacherMapper());
 		if(teachers.isEmpty()) {
-			return null;
+			Teacher teacher = new Teacher();
+			teacher.setMessage("failure");
+			return teacher;
 		}
 		return teachers.get(0);
 		

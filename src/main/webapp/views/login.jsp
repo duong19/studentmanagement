@@ -74,7 +74,7 @@
                 <div>
                     <input class="input1" type="text" placeholder="username" name="username" property="login" />
                     <input class="input1" placeholder="password"  name="password" property="login" type="password"/>
-                    <input name="usertype" id="usertype" value="" type="hidden"/>
+                    <input name="role" id="role" value="" type="hidden"/>
                 </div>
                 <div class="login-type">
                     <div class="form-check-inline">
@@ -99,7 +99,7 @@
     <script type="text/javascript">
 		$('.login-type').change(function() {
 			var s = $("input[name='type']:checked").val();
-			$('input#usertype').val(s);
+			$('input#role').val(s);
 		});
 	</script>
 </body>

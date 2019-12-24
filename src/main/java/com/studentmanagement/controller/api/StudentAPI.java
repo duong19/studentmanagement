@@ -1,6 +1,7 @@
 package com.studentmanagement.controller.api;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,6 +18,22 @@ import com.studentmanagement.util.HttpUtil;
 @WebServlet("/api-teacher-student")
 public class StudentAPI extends HttpServlet {
 	
+	
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		List<Student> students = studentService.getAll();
+		mapper.writeValue(response.getOutputStream(), students);
+
+		
+	}
+
+
+
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -36,9 +53,16 @@ public class StudentAPI extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		Student student = HttpUtil.of(request.getReader()).toModel(Student.class);
-		studentService.delete(student.getStudentID());
-		mapper.writeValue(response.getOutputStream(), "{}");
+		Student student = new Student();
+		String studentID = request.getParameter("studentID");
+
+		if(studentID != "" && studentID != null) {
+			studentService.delete(studentID);
+			student.setMessage("success");
+			mapper.writeValue(response.getOutputStream(), student);
+
+			
+		}
 
 		
 

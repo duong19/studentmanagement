@@ -172,16 +172,19 @@ html body {
     height: 50px;
     
 }
+.form-control{
+	width:50%;
+}
 </style>
 </head>
 <body>
 <div class="alert alert-success alert-add-success" role="alert" >
 		<strong>Thành công !</strong> 
 	</div>
-	<div class="alert alert-add-danger alert-danger" role="alert" >Lỗi chưa
-		thêm được sinh viên!</div>
-	<div class="alert alert-danger" role="alert" >
-		Thất bại
+	<div class="alert alert-add-danger alert-danger" role="alert" >
+	<strong>Thất bại!</strong></div>
+	<div class="alert alert-danger aler-danger1" role="alert" >
+		<strong>Thất bại</strong>
 	</div>
 	<div>
 		<div id="bgtop">
@@ -214,36 +217,40 @@ html body {
 				<button type="button" class="btn btn-danger del" disabled>
 					<i class="fa fa-trash"></i>
 				</button>
-				<button id="add-new-grade" type="button" class="btn btn-primary">
+				<button id="add-new-student" type="button" class="btn btn-primary">
 					<i class="fa fa-plus"></i>
 				</button>
-				<button id="edit-grade" type="button" class="btn btn-success edit" disabled>
+				<button id="edit-student" type="button" class="btn btn-success edit" disabled>
 					<i class="fa fa-pencil"></i>
 				</button>
 			</div>
-			<div id="addgrade" hidden>
+			<div id="addstudent" hidden>
 				<form class="form-add">
 
 					<div class="add">
 						<div class="add-label1">
-							<span>Học kỳ</span> <input fieldname="semester" />
+							<span>MSSV</span> <input fieldname="studentID" />
 						</div>
 						<div class="add-label1">
-							<span>Mã môn học</span> <input fieldname="courseID" />
+							<span>Họ tên</span> <input fieldname="name" />
 						</div>
 					</div>
 					<div class="add">
 						<div class="add-label1">
-							<span>MSSV</span> <input fieldname="studentID" />
+							<span>Địa chỉ</span> <input fieldname="address" />
 						</div>
+						<div class="add-label1">
+							<span>Mật khẩu</span> <input fieldname="password" />
+						</div>
+						
 
 					</div>
 					<div class="add">
 						<div class="add-label1">
-							<span>Điểm QT</span> <input fieldname="grade1" max="10"/>
+							<span>Khoa/viện</span> <input fieldname="faculty" />
 						</div>
 						<div class="add-label1">
-							<span>Điểm cuối kì</span> <input fieldname="grade2" max="10"/>
+							<span>Ngày sinh</span> <input fieldname="birthday" />
 						</div>
 
 					</div>
@@ -253,35 +260,37 @@ html body {
 					<button class="cancel">Hủy</button>
 				</div>
 			</div>
-			<div id="editgrade" hidden>
+			<div id="editstudent" hidden>
 				<form class="form-add">
 
 					<div class="add">
 						<div class="add-label1">
-							<span>Học kỳ</span> <input fieldname="semester" />
+							<span>MSSV</span> <input fieldname="studentID" readonly/>
 						</div>
 						<div class="add-label1">
-							<span>Mã môn học</span> <input fieldname="courseID" />
+							<span>Họ tên</span> <input fieldname="name" readonly/>
 						</div>
 					</div>
 					<div class="add">
 						<div class="add-label1">
-							<span>MSSV</span> <input fieldname="studentID" />
+							<span>Địa chỉ</span> <input fieldname="address" />
 						</div>
+						<div class="add-label1">
+							<span>Mật khẩu</span> <input fieldname="password" />
+						</div>
+						
 
 					</div>
 					<div class="add">
 						<div class="add-label1">
-							<span>Điểm QT</span> <input fieldname="grade1" max="10"/>
+							<span>Khoa/viện</span> <input fieldname="faculty" />
 						</div>
 						<div class="add-label1">
-							<span>Điểm cuối kì</span> <input fieldname="grade2" max="10"/>
+							<span>Ngày sinh</span> <input fieldname="birthday" />
 						</div>
-						<div class="add-label1" hidden>
-							<span>ID</span> <input fieldname="gradeID" />
-						</div>
+
 					</div>
-				</form>
+					</form>
 				<div class="btn-add">
 					<button class="edit1">Lưu</button>
 					<button class="cancel">Hủy</button>
@@ -291,34 +300,13 @@ html body {
 
 			<div class="button-find">
 				<div class="type-find">
-					<div style="float: left; width: 200px;">
-						<label for="sel1"><strong>Môn học</strong>:</label> <select class="form-control"
-							id="course" name="sellist1">
-							<option></option>
-							<c:forEach var="course" items="${courses}">
-								<option value="${course.courseID}">${course.courseName}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div style="float: right; width: 200px;">
-						<label for="sel2"><strong>Học kì:</strong></label> <select class="form-control"
-							id="semester" name="sellist2">
-							<option></option>
-							<c:forEach var="semester" items="${semesters}">
-								<option value="${semester.semester}">${semester.semester}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div style="float: left; width: 200px;margin-bottom:20px;margin-top:20px;">
-						<label for="sel1" style="font-size:14px;"><strong>Tìm kiếm</strong></label>
+					<label for="sel1" style="font-size:15px;"><strong>Tìm kiếm</strong></label>
 					<input id="myInput" type="text" class="form-control" placeholder="Search..">
-					</div>
-					
 
 				</div>
 				<div class="show">
-					<button type="button" class="btn btn-primary show-list-grade"
-						style="margin-top: 170px;">Hiện danh sách</button>
+					<button type="button" class="btn btn-primary show-list-student"
+						style="margin-top: 100px;">Hiện danh sách</button>
 				</div>
 			</div>
 			<div class="main-table">
@@ -326,16 +314,12 @@ html body {
 					class="table table table-hover table-bordered table-responsive-sm">
 					<thead>
 						<tr>
-							<th fieldname="gradeID" hidden>ID</th>
-							<th fieldname="semester">Học kỳ</th>
 							<th fieldname="studentID">MSSV</th>
 							<th fieldname="name">Họ tên SV</th>
-							<th fieldname="courseID">Mã HP</th>
-							<th fieldname="courseName">Tên HP</th>
-							<th fieldname="credit">Số TC</th>
-							<th fieldname="grade1">Điểm QT</th>
-							<th fieldname="grade2">Điểm thi</th>
-							<th fieldname="result">Kết quả</th>
+							<th fieldname="birthday">Ngày sinh</th>
+							<th fieldname="faculty">Khoa/viện</th>
+							<th fieldname="address">Địa chỉ</th>
+							<th fieldname="password" hidden>Password</th>
 						</tr>
 					</thead>
 					<tbody id="mytable">
@@ -347,10 +331,10 @@ html body {
 
 
 	</div>
-	<script type="text/javascript" src="template/JS/Script/teacher.js">
+	<script type="text/javascript" src="template/JS/Script/student.js">
 		
 	</script>
-		<script>
+	<script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();

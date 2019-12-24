@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -93,9 +95,14 @@ html body {
 
 .main-title, .dob, .address {
 	float: left;
-	width: 300px;
+	width: 290px;
 	margin-top: 30px;
-	margin-right: 50px;
+	margin-right: 20px;
+}
+
+.gpa {
+	margin-top: 30px;
+	width: 290px;
 }
 
 .main-info {
@@ -120,6 +127,7 @@ td {
 	position: sticky;
 	top: -1px;
 	background-color: #D0D2CF;
+	font-weight:light;
 }
 
 .main-table {
@@ -129,6 +137,17 @@ td {
 	max-height: 500px;
 	/* overflow-y: scroll; */
 	font-size: 11px;
+}
+.title-table{
+	display:flex;
+}
+.title-table>div{
+	flex:1;
+}
+.gpa{
+	margin-top:40px;
+	font-size: 15px;
+	margin-left: 600px;
 }
 </style>
 <!-- Latest compiled and minified CSS -->
@@ -159,7 +178,7 @@ td {
 					</tr>
 				</tbody>
 			</table>
-			<a href="#" class="logout" type="button">Log out</a>
+			<a href="/studentmanagement/thoat?action=logout&role=student" class="logout" type="button">Log out</a>
 		</div>
 		<div class="main-content">
 			<div class="wrapper">
@@ -170,13 +189,13 @@ td {
 				</div>
 				<div class="main-info">
 					<div class="dob">
-						<span class="info"> <strong>Họ và tên :</strong>${student.name }
-							<br> <br> <strong>Ngày sinh :</strong>${student.birthday}
+						<span class="info"> <strong>Họ và tên: </strong>${student.name }
+							<br> <br> <strong>Ngày sinh: </strong>${student.birthday}
 						</span>
 					</div>
 					<div class="address">
-						<span class="info"> <strong>Địa chỉ :</strong>${student.address } <br> <br> <strong>Khoa/viện
-								quản lý :</strong>${student.faculty }
+						<span class="info"> <strong>Địa chỉ: </strong>${student.address }
+							<br> <br> <strong>Khoa/viện: </strong>${student.faculty }
 						</span>
 					</div>
 				</div>
@@ -184,9 +203,22 @@ td {
 			<hr
 				style="background-color: black; text-align: left; position: relative; top: 30px;"
 				noshade="noshade">
-			<div style="margin-top: 40px;">
-				<span class="title">BẢNG ĐIỂM:</span>
+			<div class="title-table">
+				<div style="margin-top: 40px;">
+					<span class="title">BẢNG ĐIỂM:</span>
+				</div>
+				<div class="gpa">
+					<c:set var="total" value="${0}"/>
+					<c:set var="sumCredit" value="${0}"/>
+					<c:forEach var="grade" items="${grades}">
+						<c:set var="total" value="${total + ((grade.grade1+grade.grade2)/2)*grade.credit}"/>
+						<c:set var="sumCredit" value="${sumCredit + grade.credit}"/>
+					</c:forEach>
+					<fmt:formatNumber var="gpa" type="number" maxFractionDigits="2" minFractionDigits="2" value="${(total/sumCredit)*0.4}"/>
+					<span class="info"><strong>GPA: </strong>${gpa}</span>
+				</div>
 			</div>
+
 			<div class="main-table">
 				<table
 					class="table table table-hover table-bordered table-responsive-sm">

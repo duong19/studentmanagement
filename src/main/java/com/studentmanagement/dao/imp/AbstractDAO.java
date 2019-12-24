@@ -182,7 +182,7 @@ public class AbstractDAO {
 		}
 		return null;
 	}
-	public void update(String sql, Object... parameters) {
+	public boolean update(String sql, Object... parameters) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		try {
@@ -192,6 +192,7 @@ public class AbstractDAO {
 			setParameter(statement, parameters);
 			statement.executeUpdate();
 			connection.commit();
+			return true;
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {
@@ -200,6 +201,7 @@ public class AbstractDAO {
 					e1.printStackTrace();
 				}
 			}
+			return false;
 		} finally {
 			try {
 				if (connection != null) {
@@ -210,6 +212,7 @@ public class AbstractDAO {
 				}
 			} catch (SQLException e2) {
 				e2.printStackTrace();
+				return false;
 			}
 		}
 	}

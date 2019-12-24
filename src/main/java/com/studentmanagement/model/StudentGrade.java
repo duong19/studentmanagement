@@ -1,10 +1,10 @@
 package com.studentmanagement.model;
 
 public class StudentGrade extends Abstract {
-	private int studentID;
+	private String studentID;
 	private String courseID;
 	private String courseName;
-	private int semester;
+	private String semester;
 	private int credit;
 	private float grade1;
 	private float grade2;
@@ -13,10 +13,10 @@ public class StudentGrade extends Abstract {
 	
 	private int gradeID;
 	
-	public int getStudentID() {
+	public String getStudentID() {
 		return studentID;
 	}
-	public void setStudentID(int studentID) {
+	public void setStudentID(String studentID) {
 		this.studentID = studentID;
 	}
 	public String getCourseID() {
@@ -31,10 +31,10 @@ public class StudentGrade extends Abstract {
 	public void setGrade1(float grade) {
 		this.grade1 = grade;
 	}
-	public int getSemester() {
+	public String getSemester() {
 		return semester;
 	}
-	public void setSemester(int semester) {
+	public void setSemester(String semester) {
 		this.semester = semester;
 	}
 	public String getCourseName() {
